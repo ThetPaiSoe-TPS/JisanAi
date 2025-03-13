@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/selection.dart';
+import 'package:flutter_application/system.dart';
+import 'package:flutter_application/tech_stack.dart';
+import 'system_overview.dart';
+import 'selection.dart';
+import 'system.dart';
+import 'main.dart';
 
 void main() {
   runApp(SubMain());
@@ -7,153 +14,152 @@ void main() {
 class SubMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("My Grid Layout"), // Header
-          backgroundColor: Colors.blueGrey,
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(30),
-                child: Column(
-                  children: [
-                    // First Row with 2 boxes
-                    Expanded(
-                      child: Row(
-                        children: [
-                          _buildBox(
-                            context,
-                            boxTexts[0],
-                            NextPage(title: boxTexts[0]),
-                          ),
-                          SizedBox(width: 10),
-                          _buildBox(
-                            context,
-                            boxTexts[1],
-                            NextPage(title: boxTexts[1]),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    // Second Row with 2 boxes
-                    Expanded(
-                      child: Row(
-                        children: [
-                          _buildBox(
-                            context,
-                            boxTexts[2],
-                            NextPage(title: boxTexts[2]),
-                          ),
-                          SizedBox(width: 10),
-                          _buildBox(
-                            context,
-                            boxTexts[3],
-                            NextPage(title: boxTexts[3]),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    // Third Row with 2 boxes
-                    Expanded(
-                      child: Row(
-                        children: [
-                          _buildBox(
-                            context,
-                            boxTexts[4],
-                            NextPage(title: boxTexts[4]),
-                          ),
-                          SizedBox(width: 10),
-                          _buildBox(
-                            context,
-                            boxTexts[5],
-                            NextPage(title: boxTexts[5]),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(3),
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  "실시간 도로 시설물 인식 및 유지보수 자동화 시스템 구축 가이드", // Footer text
-                  style: TextStyle(color: Colors.blueAccent, fontSize: 16),
-                ),
-              ),
-            ),
-          ],
+    return MaterialApp(home: SubHomePage());
+  }
+}
+
+class SubHomePage extends StatelessWidget {
+  // List of pages for navigation
+  final List<Widget> pages = [
+    SystemOverview(),
+    Selection(),
+    System(),
+    FourthPage(),
+    FifthPage(),
+    TechStackPage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("App Name Here"), // Header
+        backgroundColor: Colors.blueGrey,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.lightBlue),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
         ),
       ),
-    );
-  }
-
-  // Helper function to build a box with navigation
-  Widget _buildBox(BuildContext context, String text, Widget nextPage) {
-    return Expanded(
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            // Navigate to the next page
-            context as BuildContext,
-            MaterialPageRoute(builder: (context) => nextPage),
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.lightBlue, // Box background color
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: Text(
-              text, // Different text for each box
-              style: TextStyle(
-                color: Colors.white, // White text
-                fontSize: 14,
+      body: Column(
+        children: [
+          Expanded(
+            flex:
+                2, // This ensures the grid takes up most of the available space
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 30),
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // 2 columns
+                  crossAxisSpacing: 30, // Horizontal gap
+                  mainAxisSpacing: 20, // Vertical gap
+                  childAspectRatio: 1.6, // Adjusts width-to-height ratio
+                ),
+                itemCount: 6, // Total 6 boxes
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to the corresponding page based on the index
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) =>
+                                  pages[index], // Navigate to the corresponding page
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.lightBlue,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '시스템 개요 및 전체 구조', // Dynamic text for each box
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
-              textAlign: TextAlign.center,
-              maxLines: 3, // Limits text to 3 lines
-              overflow: TextOverflow.ellipsis, // Adds "..."
             ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Text('실시간 도로 시설물 인식 및 유지보수 자동화 시스템 구축 가이드'),
+          ),
+        ],
       ),
     );
   }
 }
 
-// List of different texts for each box
-List<String> boxTexts = [
-  "시스템 개요 및 전체 구조",
-  "기술 스택 선정",
-  "시스템 상세 설계",
-  "최종 작업 단계",
-  "결론 및 기대 효과",
-  "추가 질문",
-];
-
-// Next Page to navigate to
-class NextPage extends StatelessWidget {
-  final String title;
-
-  NextPage({required this.title});
-
+// Define different pages for navigation
+class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Text("This is the $title page", style: TextStyle(fontSize: 20)),
-      ),
+      appBar: AppBar(title: Text("First Page")),
+      body: Center(child: Text("Welcome to the First Page!")),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Second Page")),
+      body: Center(child: Text("Welcome to the Second Page!")),
+    );
+  }
+}
+
+class ThirdPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Third Page")),
+      body: Center(child: Text("Welcome to the Third Page!")),
+    );
+  }
+}
+
+class FourthPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Fourth Page")),
+      body: Center(child: Text("Welcome to the Fourth Page!")),
+    );
+  }
+}
+
+class FifthPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Fifth Page")),
+      body: Center(child: Text("Welcome to the Fifth Page!")),
+    );
+  }
+}
+
+class SixthPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Sixth Page")),
+      body: Center(child: Text("Welcome to the Sixth Page!")),
     );
   }
 }

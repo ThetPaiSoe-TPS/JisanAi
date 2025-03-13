@@ -1,65 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/selection.dart';
-import 'system_overview.dart';
-import 'selection.dart';
+import 'package:flutter_application/system.dart';
+import 'package:flutter_application/system_overview.dart';
+import 'package:flutter_application/tech_stack.dart';
 
 void main() {
-  runApp(SubMain());
+  runApp(MyApp());
 }
 
-class SubMain extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MaterialApp(home: SubMain());
   }
 }
 
-class HomePage extends StatelessWidget {
+class SubMain extends StatelessWidget {
+  // List of texts for each box
+  final List<String> boxTexts = [
+    "시스템 개요 및 전체 구조",
+    "기술 스택 선정",
+    "시스템 상세 설계",
+    "최종 작업 단계",
+    "결론 및 기대 효과",
+    "추가 질문",
+  ];
+
   // List of pages for navigation
   final List<Widget> pages = [
     SystemOverview(),
     Selection(),
-    ThirdPage(),
-    FourthPage(),
-    FifthPage(),
-    SixthPage(),
+    System(),
+    Page4(),
+    Page5(),
+    TechStackPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Home Page"), // Header
-        backgroundColor: Colors.blueGrey,
+        title: Text("App Name Here", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.lightBlue,
       ),
       body: Column(
         children: [
+          // GridView for the boxes
           Expanded(
-            flex:
-                2, // This ensures the grid takes up most of the available space
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 30),
+              padding: EdgeInsets.only(
+                left: 50,
+                right: 50,
+                top: 20,
+                bottom: 10,
+              ),
               child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // 2 columns
-                  crossAxisSpacing: 30, // Horizontal gap
+                  crossAxisSpacing: 150, // Horizontal gap
                   mainAxisSpacing: 20, // Vertical gap
-                  childAspectRatio: 1.6, // Adjusts width-to-height ratio
+                  childAspectRatio: 1.2, // Width-to-height ratio of boxes
                 ),
-                itemCount: 6, // Total 6 boxes
+                itemCount: boxTexts.length, // Total 6 boxes
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
+                      if (index != 3 && index != 4) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    pages[index], // Navigate to the corresponding page
+                          ),
+                        );
+                      }
                       // Navigate to the corresponding page based on the index
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) =>
-                                  pages[index], // Navigate to the corresponding page
-                        ),
-                      );
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
@@ -69,7 +86,7 @@ class HomePage extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Box ${index + 1}', // Dynamic text for each box
+                          boxTexts[index], // Dynamic text for each box
                           style: TextStyle(color: Colors.white, fontSize: 14),
                           textAlign: TextAlign.center,
                         ),
@@ -80,70 +97,45 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10), child: Text('Flutter')),
+
+          // Footer with Text and Top Padding
+          Container(
+            padding: EdgeInsets.only(bottom: 10), // Top padding for the footer
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                "실시간 도로 시설물 인식 및 유지보수 자동화 시스템 구축 가이드",
+                style: TextStyle(
+                  color: Colors.lightBlue,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
-// Define different pages for navigation
-class FirstPage extends StatelessWidget {
+class Page4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("First Page")),
-      body: Center(child: Text("Welcome to the First Page!")),
+      appBar: AppBar(title: Text("Page 4")),
+      body: Center(child: Text("This is Page 4")),
     );
   }
 }
 
-class SecondPage extends StatelessWidget {
+class Page5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Second Page")),
-      body: Center(child: Text("Welcome to the Second Page!")),
-    );
-  }
-}
-
-class ThirdPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Third Page")),
-      body: Center(child: Text("Welcome to the Third Page!")),
-    );
-  }
-}
-
-class FourthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Fourth Page")),
-      body: Center(child: Text("Welcome to the Fourth Page!")),
-    );
-  }
-}
-
-class FifthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Fifth Page")),
-      body: Center(child: Text("Welcome to the Fifth Page!")),
-    );
-  }
-}
-
-class SixthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Sixth Page")),
-      body: Center(child: Text("Welcome to the Sixth Page!")),
+      appBar: AppBar(title: Text("Page 5")),
+      body: Center(child: Text("")),
     );
   }
 }

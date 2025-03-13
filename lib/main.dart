@@ -75,20 +75,20 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF4CAF50), // Green button color
+                      backgroundColor: Colors.white, // Green button color
                       padding: EdgeInsets.symmetric(
                         horizontal: 32,
                         vertical: 16,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                          8,
+                          18,
                         ), // Rounded corners
                       ),
                     ),
                     child: Text(
                       '시작하기',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(fontSize: 18, color: Colors.lightBlue),
                     ),
                   ),
                 ],

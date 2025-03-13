@@ -18,8 +18,11 @@ class SystemOverviewPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // White background color
       appBar: AppBar(
-        title: Text('시스템 개요 및 전체 구조'), // Header
-        backgroundColor: Colors.blueGrey,
+        title: Text(
+          '시스템 개요 및 전체 구조',
+          style: TextStyle(color: Colors.white),
+        ), // Header
+        backgroundColor: Colors.lightBlueAccent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white), // Back arrow icon
           onPressed: () {
