@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/main.dart';
 import 'package:flutter_application/selection.dart';
 import 'package:flutter_application/system.dart';
 import 'package:flutter_application/system_overview.dart';
@@ -9,6 +10,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: SubMain());
@@ -36,6 +39,8 @@ class SubMain extends StatelessWidget {
     TechStackPage(),
   ];
 
+  SubMain({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +48,16 @@ class SubMain extends StatelessWidget {
       appBar: AppBar(
         title: Text("App Name Here", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.lightBlue,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 40),
+          onPressed: () {
+            // Add your navigation logic here
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
+        ),
       ),
       body: Column(
         children: [
@@ -50,17 +65,17 @@ class SubMain extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(
-                left: 50,
-                right: 50,
-                top: 20,
+                left: 20,
+                right: 20,
+                top: 50,
                 bottom: 10,
               ),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // 2 columns
-                  crossAxisSpacing: 150, // Horizontal gap
-                  mainAxisSpacing: 20, // Vertical gap
-                  childAspectRatio: 1.2, // Width-to-height ratio of boxes
+                  crossAxisSpacing: 30, // Horizontal gap
+                  mainAxisSpacing: 30, // Vertical gap
+                  childAspectRatio: 1, // Width-to-height ratio of boxes
                 ),
                 itemCount: boxTexts.length, // Total 6 boxes
                 itemBuilder: (context, index) {
@@ -82,12 +97,12 @@ class SubMain extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(18),
                       ),
                       child: Center(
                         child: Text(
                           boxTexts[index], // Dynamic text for each box
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 24),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -100,13 +115,13 @@ class SubMain extends StatelessWidget {
 
           // Footer with Text and Top Padding
           Container(
-            padding: EdgeInsets.only(bottom: 10), // Top padding for the footer
+            padding: EdgeInsets.all(50), // Top padding for the footer
             width: double.infinity,
             child: Center(
               child: Text(
                 "실시간 도로 시설물 인식 및 유지보수 자동화 시스템 구축 가이드",
                 style: TextStyle(
-                  color: Colors.lightBlue,
+                  color: Colors.blue,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -121,6 +136,8 @@ class SubMain extends StatelessWidget {
 }
 
 class Page4 extends StatelessWidget {
+  const Page4({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,6 +148,8 @@ class Page4 extends StatelessWidget {
 }
 
 class Page5 extends StatelessWidget {
+  const Page5({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

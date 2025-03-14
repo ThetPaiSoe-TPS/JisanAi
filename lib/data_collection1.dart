@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DataCollectionPage extends StatelessWidget {
+  const DataCollectionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,11 +58,11 @@ class DataCollectionPage extends StatelessWidget {
                 "데이터 수집 단계",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 28,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 300),
 
               // White Card with Buttons
               Padding(
@@ -80,13 +82,13 @@ class DataCollectionPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 15),
+                      SizedBox(height: 35),
                       CustomButton(text: "촬영 방식"),
                       SizedBox(height: 45),
                       CustomButton(text: "데이터 전송"),
                       SizedBox(height: 45),
                       CustomButton(text: "영상 데이터 저장"),
-                      SizedBox(height: 15),
+                      SizedBox(height: 35),
                     ],
                   ),
                 ),
@@ -103,7 +105,7 @@ class DataCollectionPage extends StatelessWidget {
 class CustomButton extends StatelessWidget {
   final String text;
 
-  const CustomButton({required this.text});
+  const CustomButton({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

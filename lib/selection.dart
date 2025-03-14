@@ -6,6 +6,8 @@ void main() {
 }
 
 class Selection extends StatelessWidget {
+  const Selection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +18,8 @@ class Selection extends StatelessWidget {
 }
 
 class SelectionPage extends StatelessWidget {
+  const SelectionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +38,11 @@ class SelectionPage extends StatelessWidget {
         ),
         title: Text(
           "기술 스택 선정", // Korean Title
-          style: TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -60,7 +68,7 @@ class SelectionPage extends StatelessWidget {
             flex: 3,
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 50),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -90,18 +98,18 @@ class SelectionPage extends StatelessWidget {
   Widget buildOptionButton(String text) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+      margin: EdgeInsets.only(bottom: 30),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue, width: 1.5),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Center(
         child: Text(
           text,
           style: TextStyle(
             color: Colors.blue,
-            fontSize: 12,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),

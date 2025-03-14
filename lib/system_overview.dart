@@ -6,6 +6,8 @@ void main() {
 }
 
 class SystemOverview extends StatelessWidget {
+  const SystemOverview({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: SystemOverviewPage());
@@ -13,72 +15,107 @@ class SystemOverview extends StatelessWidget {
 }
 
 class SystemOverviewPage extends StatelessWidget {
+  const SystemOverviewPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // White background color
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          '시스템 개요 및 전체 구조',
-          style: TextStyle(color: Colors.white),
-        ), // Header
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.blue,
+        elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white), // Back arrow icon
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            // Navigate back to the previous page
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => SubMain()),
             );
           },
         ),
+        title: Text(
+          "시스템 상세 설계", // Korean Title
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(3), // Padding around the content
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // First section (takes half of the space)
-            Expanded(
-              flex: 1, // Takes half of the available space
-              child: Center(
-                child: Text(
-                  '데이터 수집 및 실시간 처리',
+      body: Column(
+        children: [
+          // Top Blue Section with Image
+          Expanded(
+            flex: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "데이터 수집 및 실시간 처리",
                   style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
+                    color: const Color.fromARGB(255, 9, 109, 192),
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              ],
+            ),
+          ),
+
+          // Bottom White Section with Rounded Corners
+          Expanded(
+            flex: 3,
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              decoration: BoxDecoration(
+                color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    buildOptionButton("도로 시설물 실시간 촬영", onPressed: () {}),
+                    buildOptionButton("서버 저장 및 데이터 전처리"),
+                    buildOptionButton("AI 분석 및 문제점 감지", onPressed: () {}),
+                    buildOptionButton("AS 상황실 전달 및 유지보수 일정 결정"),
+                    buildOptionButton("어플리케이션 기반 UI/UX 구현"),
+                  ],
+                ),
               ),
             ),
-            // Remaining sections (5 cards)
-            Expanded(
-              flex: 1, // Takes the other half of the available space
-              child: Column(
-                children: [
-                  _buildCard('도로 시설물 실시간 촬영'),
-                  _buildCard('서버 저장 및 데이터 전처리'),
-                  _buildCard('AI 분석 및 문제점 감지'),
-                  _buildCard('AS 상황실 전달 및 유지보수 일정 결정'),
-                  _buildCard('어플리케이션 기반 UI/UX 구현'),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  // Helper function to build a card
-  Widget _buildCard(String title) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 1), // Spacing between cards
-      child: Padding(
-        padding: EdgeInsets.all(3), // Padding inside the card
-        child: Text(title, style: TextStyle(fontSize: 12, color: Colors.black)),
+  // Widget for Bordered Buttons
+  Widget buildOptionButton(String text, {VoidCallback? onPressed}) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+      margin: EdgeInsets.only(bottom: 15),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: .1),
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.white,
+      ),
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: const Color.fromARGB(255, 9, 109, 192),
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

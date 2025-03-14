@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MaintenancePage extends StatelessWidget {
+  const MaintenancePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,15 +54,18 @@ class MaintenancePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Page Title
-              Text(
-                "유지보수 알림 및 일정 관리",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsets.all(50),
+                child: Text(
+                  "유지보수 알림 및 일정 관리",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 200),
 
               // White Card with Buttons
               Padding(
@@ -80,13 +85,13 @@ class MaintenancePage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 15),
+                      SizedBox(height: 35),
                       CustomButton(text: "AI 분석 결과를 서버에 저장"),
                       SizedBox(height: 45),
                       CustomButton(text: "AS 상황실 대시보드 제공"),
                       SizedBox(height: 45),
                       CustomButton(text: "유지보수 일정 결정"),
-                      SizedBox(height: 15),
+                      SizedBox(height: 35),
                     ],
                   ),
                 ),
@@ -103,7 +108,7 @@ class MaintenancePage extends StatelessWidget {
 class CustomButton extends StatelessWidget {
   final String text;
 
-  const CustomButton({required this.text});
+  const CustomButton({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
